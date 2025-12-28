@@ -1,6 +1,6 @@
 {
   "name": "@seedkey/sdk-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Core library for SeedKey passwordless authentication protocol",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -51,7 +51,8 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsup",
@@ -61,7 +62,14 @@
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build",
+    "release": "npm run prepublishOnly && npm publish --access public",
+    "release:dry": "npm run prepublishOnly && npm publish --access public --dry-run",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version",
+    "version:prerelease": "npm version prerelease --preid=beta --no-git-tag-version"
   },
   "dependencies": {
     "@noble/ed25519": "^2.1.0"
@@ -88,6 +96,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mbessarab/seedkey-server-sdk.git"
+  },
+  "homepage": "https://github.com/mbessarab/seedkey-server-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/mbessarab/seedkey-server-sdk/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "engines": {
     "node": ">=18"
