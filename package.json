@@ -1,0 +1,95 @@
+{
+  "name": "@seedkey/sdk-server",
+  "version": "0.0.1",
+  "description": "Core library for SeedKey passwordless authentication protocol",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./crypto": {
+      "import": {
+        "types": "./dist/crypto/index.d.ts",
+        "default": "./dist/crypto/index.js"
+      },
+      "require": {
+        "types": "./dist/crypto/index.d.cts",
+        "default": "./dist/crypto/index.cjs"
+      }
+    },
+    "./types": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/types/index.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.cts",
+        "default": "./dist/types/index.cjs"
+      }
+    },
+    "./services": {
+      "import": {
+        "types": "./dist/services/index.d.ts",
+        "default": "./dist/services/index.js"
+      },
+      "require": {
+        "types": "./dist/services/index.d.cts",
+        "default": "./dist/services/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@noble/ed25519": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [
+    "auth",
+    "authentication",
+    "passwordless",
+    "ed25519",
+    "cryptography",
+    "seedkey",
+    "protocol"
+  ],
+  "author": "mbessarab",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbessarab/seedkey-server-sdk.git"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "seedkey-fastify-example",
+  "version": "0.0.1",
+  "description": "SeedKey authentication example with Fastify",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "@fastify/jwt": "^9.0.1",
+    "@seedkey/sdk-server": "file:../..",
+    "fastify": "^5.1.0",
+    "pino-pretty": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
