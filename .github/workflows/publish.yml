@@ -184,8 +184,8 @@ jobs:
         run: |
           echo "## 🚀 Published to npm" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Package:** @seedkey/sdk-client" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** @seedkey/sdk-server" >> $GITHUB_STEP_SUMMARY
           echo "**Version:** ${{ needs.check-version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "[View on npm](https://www.npmjs.com/package/@seedkey/sdk-client)" >> $GITHUB_STEP_SUMMARY
+          echo "[View on npm](https://www.npmjs.com/package/@seedkey/sdk-server)" >> $GITHUB_STEP_SUMMARY
 
