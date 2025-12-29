@@ -1,19 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AuthService } from '../../src/services/auth.service';
 import type {
-  UserStoreAdapter,
-  ChallengeStoreAdapter,
-  SessionStoreAdapter,
   TokenGenerator,
 } from '../../src/services/auth.service';
 import { resolveConfig } from '../../src/types/config';
-import type { User, StoredChallenge, TokenPair } from '../../src/types';
+import type { User, TokenPair, UserStore, ChallengeStore, SessionStore, Session } from '../../src/types';
 
 describe('AuthService', () => {
   let authService: AuthService;
-  let mockUserStore: UserStoreAdapter;
-  let mockChallengeStore: ChallengeStoreAdapter;
-  let mockSessionStore: SessionStoreAdapter;
+  let mockUserStore: UserStore;
+  let mockChallengeStore: ChallengeStore;
+  let mockSessionStore: SessionStore;
   let mockTokenGenerator: TokenGenerator;
 
   const testUser: User = {
@@ -51,8 +48,22 @@ describe('AuthService', () => {
       isNonceUsed: vi.fn(),
     };
 
+    const now = Date.now();
+    const testSession: Session = {
+      id: 'session_123',
+      userId: testUser.id,
+      publicKeyId: testUser.publicKey.id,
+      createdAt: now,
+      expiresAt: now + 3600 * 1000,
+      invalidated: false,
+    };
+
     mockSessionStore = {
-      create: vi.fn().mockResolvedValue({ id: 'session_123' }),
+      create: vi.fn().mockResolvedValue(testSession),
+      findById: vi.fn(),
+      invalidate: vi.fn(),
+      invalidateAllForUser: vi.fn(),
+      isValid: vi.fn(),
     };
 
     mockTokenGenerator = vi.fn().mockResolvedValue(testTokens);

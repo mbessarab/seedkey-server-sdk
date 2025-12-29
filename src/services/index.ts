@@ -8,8 +8,5 @@ export type {
   AuthServiceDeps,
   RegisterResult,
   VerifyResult,
-  UserStoreAdapter,
-  ChallengeStoreAdapter,
-  SessionStoreAdapter,
   TokenGenerator,
 } from './auth.service.js';

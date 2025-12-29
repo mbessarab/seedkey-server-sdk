@@ -177,7 +177,7 @@ fastify.post<{ Body: RegisterRequest }>('/api/v1/seedkey/register', async (reque
       user: {
         id: result.user.id,
         publicKey: result.keyInfo.publicKey,
-        createdAt: result.user.createdAt.toISOString(),
+        createdAt: result.user.createdAt, // Unix timestamp (ms)
       },
       token: result.tokens,
     });
@@ -197,8 +197,8 @@ fastify.post<{ Body: VerifyRequest }>('/api/v1/seedkey/verify', async (request, 
       user: {
         id: result.user.id,
         publicKey: result.keyInfo.publicKey,
-        createdAt: result.user.createdAt.toISOString(),
-        lastLogin: result.user.lastLogin?.toISOString() || new Date().toISOString(),
+        createdAt: result.user.createdAt, // Unix timestamp (ms)
+        lastLogin: result.user.lastLogin ?? Date.now(), // Unix timestamp (ms)
       },
       token: result.tokens,
     });
@@ -273,10 +273,10 @@ fastify.get('/api/v1/seedkey/user', { preHandler: [authenticateRequest] }, async
           id: publicKey.id,
           publicKey: publicKey.publicKey,
           deviceName: publicKey.deviceName,
-          addedAt: publicKey.addedAt.toISOString(),
-          lastUsed: publicKey.lastUsed.toISOString(),
+          addedAt: publicKey.addedAt, // Unix timestamp (ms)
+          lastUsed: publicKey.lastUsed, // Unix timestamp (ms)
         } : null,
-        createdAt: user.createdAt.toISOString(),
+        createdAt: user.createdAt, // Unix timestamp (ms)
       },
     });
   } catch (error) {

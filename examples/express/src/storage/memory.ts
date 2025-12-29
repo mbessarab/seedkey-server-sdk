@@ -2,9 +2,21 @@
  * In-Memory Storage Implementations
  */
 
-import type { StoredChallenge, Session, PublicKeyInfo, KeyMetadata, UserMetadata } from '@seedkey/sdk-server';
+import type {
+  StoredChallenge,
+  Session,
+  PublicKeyInfo,
+  KeyMetadata,
+  UserMetadata,
+  User,
+  UserStore,
+  ChallengeStore,
+  SessionStore,
+  SeedKeyStores,
+} from '@seedkey/sdk-server';
 import { generateId } from '@seedkey/sdk-server';
-import type { User, UserStore, ChallengeStore, SessionStore, SeedKeyStores } from './interfaces.js';
+
+export type { SeedKeyStores } from '@seedkey/sdk-server';
 
 /**
  * In-Memory User Store

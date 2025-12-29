@@ -50,7 +50,7 @@ export const config = resolveConfig({
 ```ts
 import type { StoredChallenge, TokenPair, User } from '@seedkey/sdk-server';
 
-export interface UserStoreAdapter {
+export interface UserStore {
   findById(id: string): Promise<User | null>;
   findByPublicKey(publicKey: string): Promise<User | null>;
   create(
@@ -61,7 +61,7 @@ export interface UserStoreAdapter {
   publicKeyExists(publicKey: string): Promise<boolean>;
 }
 
-export interface ChallengeStoreAdapter {
+export interface ChallengeStore {
   save(challenge: StoredChallenge): Promise<void>;
   findById(id: string): Promise<StoredChallenge | null>;
   isNonceUsed(nonce: string): Promise<boolean>;
@@ -70,7 +70,7 @@ export interface ChallengeStoreAdapter {
   markAsUsed(id: string): Promise<boolean>;
 }
 
-export interface SessionStoreAdapter {
+export interface SessionStore {
   create(
     userId: string,
     publicKeyId: string,
@@ -90,18 +90,12 @@ export type TokenGenerator = (
 ```ts
 const authService = new AuthService({
   config,
-  users: userStoreAdapter,
-  challenges: challengeStoreAdapter,
-  sessions: sessionStoreAdapter,
+  users: userStore,
+  challenges: challengeStore,
+  sessions: sessionStore,
   generateTokens,
 });
 ```
-
-Минимальные эндпоинты:
-
-- `POST /api/v1/seedkey/challenge`
-- `POST /api/v1/seedkey/register`
-- `POST /api/v1/seedkey/verify`
 
 Рекомендованный список API:
 

@@ -15,6 +15,9 @@ import type {
   TokenPair,
   User,
   PublicKeyInfo,
+  UserStore,
+  ChallengeStore,
+  SessionStore,
 } from '../types/index.js';
 import {
   SeedKeyError,
@@ -25,35 +28,6 @@ import {
   verifyChallengeSignature,
   validateChallenge,
 } from '../crypto/index.js';
-
-/**
- * User storage adapter interface
- * Implementations provided by the backend
- */
-export interface UserStoreAdapter {
-  findById(id: string): Promise<User | null>;
-  findByPublicKey(publicKey: string): Promise<User | null>;
-  create(publicKey: string, metadata?: { deviceName?: string; extensionVersion?: string }): Promise<User>;
-  updateLastLogin(userId: string, publicKey: string): Promise<void>;
-  publicKeyExists(publicKey: string): Promise<boolean>;
-}
-
-/**
- * Challenge storage adapter interface
- */
-export interface ChallengeStoreAdapter {
-  save(challenge: StoredChallenge): Promise<void>;
-  findById(id: string): Promise<StoredChallenge | null>;
-  markAsUsed(id: string): Promise<boolean>;
-  isNonceUsed(nonce: string): Promise<boolean>;
-}
-
-/**
- * Session storage adapter interface
- */
-export interface SessionStoreAdapter {
-  create(userId: string, publicKeyId: string, expiresInSeconds?: number): Promise<{ id: string }>;
-}
 
 /**
  * Token generator function type
@@ -70,9 +44,9 @@ export type TokenGenerator = (
  */
 export interface AuthServiceDeps {
   config: ResolvedConfig;
-  users: UserStoreAdapter;
-  challenges: ChallengeStoreAdapter;
-  sessions: SessionStoreAdapter;
+  users: UserStore;
+  challenges: ChallengeStore;
+  sessions: SessionStore;
   generateTokens: TokenGenerator;
 }
 
@@ -287,10 +261,30 @@ export class AuthService {
   }
 
   /**
+   * Logout user (invalidate session)
+   */
+  async logout(sessionId: string): Promise<void> {
+    await this.deps.sessions.invalidate(sessionId);
+  }
+
+  /**
    * Get user by ID
    */
   async getUser(userId: string): Promise<User | null> {
     return this.deps.users.findById(userId);
   }
-}
 
+  /**
+   * Check if session is valid
+   */
+  async isSessionValid(sessionId: string): Promise<boolean> {
+    return this.deps.sessions.isValid(sessionId);
+  }
+
+  /**
+   * Invalidate all user sessions
+   */
+  async invalidateAllSessions(userId: string): Promise<void> {
+    await this.deps.sessions.invalidateAllForUser(userId);
+  }
+}

@@ -53,3 +53,11 @@ export type {
   SeedKeyConfig,
   ResolvedConfig,
 } from './config.js';
+
+// Storage interfaces
+export type {
+  UserStore,
+  ChallengeStore,
+  SessionStore,
+  SeedKeyStores,
+} from './storage.js';
