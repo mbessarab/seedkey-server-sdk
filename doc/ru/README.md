@@ -178,10 +178,13 @@ const ERROR_CODES = {
 - сконцентрируйтесь на своей бизнес-логике и разверните self-hosted сервис `seedkey-auth-service`, перенаправляя запросы на аутентификацию в него;
 - или отдайте разворачивание `seedkey-auth-service` + `seedkey-auth-service-migrations` Helm-чарту `seedkey-auth-service-helm-chart`.
 
+### 🔧 Связные проекты
 Ознакомьтесь также с другими репозиториями экосистемы:
-
-- `seedkey-sdk-client` — библиотека для работы с расширением и отправки запросов на бэкенд.
-- `seedkey-browser-extension` — браузерное расширение.
+- [seedkey-browser-extension](https://github.com/mbessarab/seedkey-browser-extension) — браузерное расширение.
+- [seedkey-db-migrations](https://github.com/mbessarab/seedkey-db-migrations) — миграции для `seedkey-auth-service`.
+- [seedkey-auth-service](https://github.com/mbessarab/seedkey-auth-service) — self-hosted сервис аутентификации.
+- [seedkey-client-sdk](https://github.com/mbessarab/seedkey-client-sdk) — клиентская библиотека для работы с расширением.
+- [seedkey-auth-service-helm-chart](https://github.com/mbessarab/seedkey-auth-service-helm-chart) — Helm Chart для развёртывания `seedkey-auth-service` + миграций.
 
 ## 🤝 Контрибьютинг
 

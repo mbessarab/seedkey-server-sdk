@@ -178,10 +178,13 @@ For effective integration with your backend:
 - focus on your business logic and deploy the self-hosted `seedkey-auth-service`, forwarding authentication requests to it;
 - or delegate the deployment of `seedkey-auth-service` + `seedkey-auth-service-migrations` to the Helm chart `seedkey-auth-service-helm-chart`.
 
+### 🔧 Related Projects
 Also check out other repositories in the ecosystem:
-
-- `seedkey-sdk-client` — a library for working with the extension and sending requests to your backend.
-- `seedkey-browser-extension` — the browser extension.
+- [seedkey-browser-extension](https://github.com/mbessarab/seedkey-browser-extension) — browser extension.
+- [seedkey-db-migrations](https://github.com/mbessarab/seedkey-db-migrations) — migrations for `seedkey-auth-service`.
+- [seedkey-auth-service](https://github.com/mbessarab/seedkey-auth-service) — self-hosted authentication service.
+- [seedkey-client-sdk](https://github.com/mbessarab/seedkey-client-sdk) — client library for working with the extension.
+- [seedkey-auth-service-helm-chart](https://github.com/mbessarab/seedkey-auth-service-helm-chart) — Helm chart for deploying `seedkey-auth-service` + migrations.
 
 ## 🤝 Contributing
 
